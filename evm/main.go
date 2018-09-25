@@ -35,7 +35,8 @@ import (
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/ethdb"
 	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/logger/glog"
+
+	// "github.com/ethereum/go-ethereum/logger/glog"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -60,8 +61,8 @@ func init() {
 }
 
 func run(ctx *cli.Context) error {
-	glog.SetToStderr(true)
-	glog.SetV(ctx.GlobalInt(VerbosityFlag.Name))
+	// glog.SetToStderr(true)
+	// glog.SetV(ctx.GlobalInt(VerbosityFlag.Name))
 
 	dataDir := ctx.GlobalString(DataDirFlag.Name)
 	rootHash := common.Hash{}

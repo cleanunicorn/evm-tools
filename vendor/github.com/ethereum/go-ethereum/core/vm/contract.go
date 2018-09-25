@@ -24,10 +24,10 @@ import (
 
 // ContractRef is a reference to the contract's backing object
 type ContractRef interface {
-	ReturnGas(*big.Int, *big.Int)
+	ReturnGas(*big.Int)
 	Address() common.Address
 	Value() *big.Int
-	SetCode([]byte)
+	SetCode(common.Hash, []byte)
 	ForEachStorage(callback func(key, value common.Hash) bool)
 }
 
@@ -44,10 +44,11 @@ type Contract struct {
 	jumpdests destinations // result of JUMPDEST analysis.
 
 	Code     []byte
-	Input    []byte
+	CodeHash common.Hash
 	CodeAddr *common.Address
+	Input    []byte
 
-	value, Gas, UsedGas, Price *big.Int
+	value, Gas, UsedGas *big.Int
 
 	Args []byte
 
@@ -55,7 +56,7 @@ type Contract struct {
 }
 
 // NewContract returns a new contract environment for the execution of EVM.
-func NewContract(caller ContractRef, object ContractRef, value, gas, price *big.Int) *Contract {
+func NewContract(caller ContractRef, object ContractRef, value, gas *big.Int) *Contract {
 	c := &Contract{CallerAddress: caller.Address(), caller: caller, self: object, Args: nil}
 
 	if parent, ok := caller.(*Contract); ok {
@@ -69,9 +70,6 @@ func NewContract(caller ContractRef, object ContractRef, value, gas, price *big.
 	// This pointer will be off the state transition
 	c.Gas = gas //new(big.Int).Set(gas)
 	c.value = new(big.Int).Set(value)
-	// In most cases price and value are pointers to transaction objects
-	// and we don't want the transaction's values to change.
-	c.Price = new(big.Int).Set(price)
 	c.UsedGas = new(big.Int)
 
 	return c
@@ -113,7 +111,7 @@ func (c *Contract) Caller() common.Address {
 // caller.
 func (c *Contract) Finalise() {
 	// Return the remaining gas to the caller
-	c.caller.ReturnGas(c.Gas, c.Price)
+	c.caller.ReturnGas(c.Gas)
 }
 
 // UseGas attempts the use gas and subtracts it and returns true on success
@@ -126,7 +124,7 @@ func (c *Contract) UseGas(gas *big.Int) (ok bool) {
 }
 
 // ReturnGas adds the given gas back to itself.
-func (c *Contract) ReturnGas(gas, price *big.Int) {
+func (c *Contract) ReturnGas(gas *big.Int) {
 	// Return the gas to the context
 	c.Gas.Add(c.Gas, gas)
 	c.UsedGas.Sub(c.UsedGas, gas)
@@ -143,14 +141,16 @@ func (c *Contract) Value() *big.Int {
 }
 
 // SetCode sets the code to the contract
-func (self *Contract) SetCode(code []byte) {
+func (self *Contract) SetCode(hash common.Hash, code []byte) {
 	self.Code = code
+	self.CodeHash = hash
 }
 
 // SetCallCode sets the code of the contract and address of the backing data
 // object
-func (self *Contract) SetCallCode(addr *common.Address, code []byte) {
+func (self *Contract) SetCallCode(addr *common.Address, hash common.Hash, code []byte) {
 	self.Code = code
+	self.CodeHash = hash
 	self.CodeAddr = addr
 }
 

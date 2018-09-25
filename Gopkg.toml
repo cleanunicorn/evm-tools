@@ -27,7 +27,7 @@
 
 [[constraint]]
   name = "github.com/ethereum/go-ethereum"
-  version = "1.4.10"
+  branch = "master"
 
 [[constraint]]
   name = "gopkg.in/urfave/cli.v1"

@@ -2,18 +2,27 @@
 
 
 [[projects]]
-  digest = "1:625d7316994573f9f39d7db564e3a3085136ab099ff2d74fe01ec042dcd24916"
+  branch = "master"
+  digest = "1:7d191fd0c54ff370eaf6116a14dafe2a328df487baea280699f597aae858d00d"
+  name = "github.com/aristanetworks/goarista"
+  packages = ["monotime"]
+  pruneopts = "UT"
+  revision = "ff33da284e760fcdb03c33d37a719e5ed30ba844"
+
+[[projects]]
+  digest = "1:bdf6a9999a6932defa7e6f053d8ce8b3eabce7ce063a4729126c816ca8392bf0"
   name = "github.com/ethereum/go-ethereum"
   packages = [
-    "accounts",
     "common",
+    "common/hexutil",
+    "common/math",
+    "common/mclock",
     "core",
     "core/state",
     "core/types",
     "core/vm",
     "crypto",
     "crypto/ecies",
-    "crypto/randentropy",
     "crypto/secp256k1",
     "crypto/sha3",
     "ethdb",
@@ -27,49 +36,42 @@
     "trie",
   ]
   pruneopts = "UT"
-  revision = "5f55d95aea433ef97c48ae927835d833772350de"
-  version = "v1.4.10"
+  revision = "a07539fb88db7231d18db918ed7a6a4e32f97450"
+  version = "v1.5.9"
 
 [[projects]]
-  digest = "1:f22f8c790420b7a6ef3934b4d205954f8fe3fb25dc381d21ab2611ff8237b3f7"
+  branch = "master"
+  digest = "1:4a0c6bb4805508a6287675fac876be2ac1182539ca8a32468d8128882e9d5009"
   name = "github.com/golang/snappy"
   packages = ["."]
   pruneopts = "UT"
-  revision = "799c780093d646c1b79d30894e22512c319fa137"
+  revision = "2e65f85255dbc3072edf28d6b5b8efc472979f5a"
 
 [[projects]]
-  digest = "1:3f90d23757c18b1e07bf11494dbe737ee2c44d881c0f41e681611abdadad62fa"
+  digest = "1:8ec8d88c248041a6df5f6574b87bc00e7e0b493881dad2e7ef47b11dc69093b5"
   name = "github.com/hashicorp/golang-lru"
   packages = [
     ".",
     "simplelru",
   ]
   pruneopts = "UT"
-  revision = "a0d98a5f288019575c6d1f4bb1573fef2d1fcdc4"
+  revision = "20f1fb78b0740ba8c3cb143a61e86ba5c8669768"
+  version = "v0.5.0"
 
 [[projects]]
-  digest = "1:0ac0af69bcb472eb27556c8b7d00e65d0b871d732e9f2301a01bbfa686190ae4"
-  name = "github.com/pborman/uuid"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "0f1a46960a86dcdf5dd30d3e6568a497a997909f"
-
-[[projects]]
-  digest = "1:681df91c3ed2d07f3bb565df17da4b2123a1bbe6ef830b4d6b9217b19cda1dc1"
+  branch = "master"
+  digest = "1:a16e70ee324590c9f04f5a91401df5c805939ed12ffc5c25365d67658531d386"
   name = "github.com/rcrowley/go-metrics"
-  packages = ["."]
+  packages = [
+    ".",
+    "exp",
+  ]
   pruneopts = "UT"
-  revision = "51425a2415d21afadfd55cd93432c0bc69e9598d"
+  revision = "e2704e165165ec55d062f5919b4b29494e9fa790"
 
 [[projects]]
-  digest = "1:6dd6044da16f5696a75450f3840b3fac9b78f8b42e62de0a4c18e204529ceef3"
-  name = "github.com/rjeczalik/notify"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "5dd6205716539662f8f14ab513552b41eab69d5d"
-
-[[projects]]
-  digest = "1:3ed2b7f9036138f7f52d415c7541e786e5ebeb51ed3042a76b029bab07bf3507"
+  branch = "master"
+  digest = "1:f2ffd421680b0a3f7887501b3c6974bcf19217ecd301d0e2c9b681940ec363d5"
   name = "github.com/syndtr/goleveldb"
   packages = [
     "leveldb",
@@ -86,18 +88,23 @@
     "leveldb/util",
   ]
   pruneopts = "UT"
-  revision = "917f41c560270110ceb73c5b38be2a9127387071"
+  revision = "ae2bd5eed72d46b28834ec3f60db3a3ebedd8dbd"
 
 [[projects]]
-  digest = "1:93f060d8b834ab21ea5b0f4bed4013c288a9eb0a2adf7aa7e7cafd2a2d57e160"
+  branch = "master"
+  digest = "1:f804354850ef747f20e387a75e04dfc64a205ab342f7086b7d77796865ff5ede"
   name = "golang.org/x/crypto"
-  packages = [
-    "pbkdf2",
-    "ripemd160",
-    "scrypt",
-  ]
+  packages = ["ripemd160"]
   pruneopts = "UT"
-  revision = "1f22c0103821b9390939b6776727195525381532"
+  revision = "0e37d006457bf46f9e6692014ba72ef82c33022c"
+
+[[projects]]
+  branch = "master"
+  digest = "1:76ee51c3f468493aff39dbacc401e8831fbb765104cbf613b89bef01cf4bad70"
+  name = "golang.org/x/net"
+  packages = ["context"]
+  pruneopts = "UT"
+  revision = "f04abc6bdfa7a0171a8a0c9fd2ada9391044d056"
 
 [[projects]]
   digest = "1:5f1d44e13c151d777a80b0d8ca850347530773e73ccce5995a520cdc6947c205"
@@ -116,12 +123,12 @@
   revision = "8dcd6a7f4951f6ff3ee9cbb919a06d8925822e57"
 
 [[projects]]
-  digest = "1:01d3c3dfb7ef9da24cd00cbd5b9e2c147fa7a3f44a83028bc737da9cac7ed60b"
+  digest = "1:b24d38b282bacf9791408a080f606370efa3d364e4b5fd9ba0f7b87786d3b679"
   name = "gopkg.in/urfave/cli.v1"
   packages = ["."]
   pruneopts = "UT"
-  revision = "0bdeddeeb0f650497d603c4ad7b20cfe685682f6"
-  version = "v1.19.1"
+  revision = "cfb38830724cc34fedffe9a2a29fb54fa9169cd1"
+  version = "v1.20.0"
 
 [solve-meta]
   analyzer-name = "dep"

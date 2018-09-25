@@ -76,7 +76,7 @@ func (it *NodeIterator) step() error {
 	}
 	// Initialize the iterator if we've just started
 	if it.stateIt == nil {
-		it.stateIt = trie.NewNodeIterator(it.state.trie.Trie)
+		it.stateIt = it.state.trie.NodeIterator()
 	}
 	// If we had data nodes previously, we surely have at least state nodes
 	if it.dataIt != nil {
@@ -123,7 +123,7 @@ func (it *NodeIterator) step() error {
 	if !it.dataIt.Next() {
 		it.dataIt = nil
 	}
-	if bytes.Compare(account.CodeHash, emptyCodeHash) != 0 {
+	if !bytes.Equal(account.CodeHash, emptyCodeHash) {
 		it.codeHash = common.BytesToHash(account.CodeHash)
 		it.code, err = it.state.db.Get(account.CodeHash)
 		if err != nil {
